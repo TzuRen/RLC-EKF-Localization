@@ -80,7 +80,13 @@ Other settings adjustment can be done in **train_evaluate.py**.
 -   **T**: Total length of each eposide. 
 -   **ENV_NAME**: The name of the gym formed enviroment.
 
-
+To change the structure and activation of the MLP network, you can do:
+```bash
+# Custom MLP policy of two layers of size 32 each with tanh activation function
+policy_kwargs = dict(act_fun=tf.nn.tanh, net_arch=[32, 32])
+# Create the agent
+model = PPO2("MlpPolicy", "Env_name", policy_kwargs=policy_kwargs, verbose=1)
+```
 When all settings are done, directly execute the script and wait for finishing. During the training, a tensorboard log file is generated in the folder ./logs. You can want the simutanous training loss through:
 
 ```bash
@@ -99,8 +105,10 @@ After setting is done, we can directly run the evaluation script, and obtain cos
 -   **show_animation**: Whether display the result statically or simutanously.
 
 ### **Evaluation with real data**
-To do so, you can import RLestimator_real_data instead of RLestimator_ekf in training and evaluation scripts. The data path should be changed to the local path, with the format give by:
--   Column 1-4: Quaternion x, y, z, w.
--   Column 5-7: Angular velocity x, y, z.
--   Column 8-10: Linear acceleration x, y, z.
--   Column 11-13: Magnetic field x, y, z.
+There are 4 types of UTIAS dataset with different sampling rate, presented in .mat format under the folder /datasets. For switching differnt dataset collection, change the line in "RLestimator_ekf_realdata.py":
+
+```bash
+#line 87-88 (robot label indicates individual robot you want to use)
+dataset_path = "dataset/" + "MRCLAM0.2.mat"
+robot_label = 5
+```
