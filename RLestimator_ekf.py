@@ -94,7 +94,7 @@ class RL_estimator(gym.Env):
         # self.Cx = np.diag([0.1, 0.1, np.deg2rad(6.0)]) ** 2
 
         # EKF measurement covariance for three observations update
-        self.Cx_obs = np.diag([0.5, 0.5, 0.5, 0.5, 0.5, 0.5]) ** 2 * 4800
+        self.Cx_obs = np.diag([0.5, 0.5, 0.5, 0.5, 0.5, 0.5]) ** 2
         # self.Cx_obs = np.diag([0.1, 0.1, 0.1, 0.1, 0.1, 0.1]) ** 2
 
         # Simulation parameter:
