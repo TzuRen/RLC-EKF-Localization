@@ -115,7 +115,7 @@ class RL_estimator(gym.Env):
         # add offset to initial state for EKF thread
         self.xEst = np.zeros((self.STATE_SIZE, 1)) + self.initial_bias
         # self.xEst = np.array([[-3.09316017], [-3.07106977], [4.02412283]])
-        print(self.xEst)
+        # print(self.xEst)
         # self.xEst = np.array([[-9.6179116], [3.60767583], [-1.53236842]])
         # self.xEst = np.array([[6.11110985], [-3.75781535], [8.49916211]])
         # print(self.xEst)
@@ -197,6 +197,7 @@ class RL_estimator(gym.Env):
         # combine rl action
             self.x_RL = self.x_RL + (action @ y)
             self.x_RL[2] = pi_2_pi(self.x_RL[2])
+
         hat_eta = K @ y
         # cost function
         cost =  -math.sqrt((self.x_RL[0] - self.xTrue[0]) ** 2 + (self.x_RL[1] - self.xTrue[1]) ** 2)
