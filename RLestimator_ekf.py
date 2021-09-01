@@ -197,8 +197,7 @@ class RL_estimator(gym.Env):
         # combine rl action
             self.x_RL = self.x_RL + (action @ y)
             self.x_RL[2] = pi_2_pi(self.x_RL[2])
-
-        hat_eta = (self.x_RL - self.xTrue)[:2, 0]
+        hat_eta = K @ y
         # cost function
         cost =  -math.sqrt((self.x_RL[0] - self.xTrue[0]) ** 2 + (self.x_RL[1] - self.xTrue[1]) ** 2)
         # if cost > (10) or self.t >= self.total_time:
